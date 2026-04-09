@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Aranya.Domain.Entities.Villa>
+<center>
+<div class="w-75 card border-3 p-2 text-lg-center">
+    <div class="card-header bg-success rounded-3 border-2 bg-gradient">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="text-light text-center">Villa List</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card-body border w-75 p-4">
+    <div class="row pb-3">
+        <div class="col-6 text-end offset-6">
+            <a asp-controller="Villa" asp-action="Create" class="btn btn-dark">Create New Villa</a>
+        </div>
+    </div>
+<table class="table table-bordered table-striped w-75">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Area
+            </th>
+            <th>
+                Occupancy
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var villa in Model)
+        {
+            <tr>
+                <td>
+                    @villa.Name
+                </td>
+                <td>@villa.Rate</td>
+                <td>@villa.Area</td>
+                <td>@villa.Occupancy</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+    </div>
+</center>
