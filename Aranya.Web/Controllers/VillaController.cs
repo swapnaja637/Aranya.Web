@@ -16,5 +16,9 @@ namespace Aranya.Web.Controllers
             var villas = _context.Tbl_Villas.ToList();
             return View(villas);
         }
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }
