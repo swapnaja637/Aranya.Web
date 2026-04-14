@@ -1,20 +1,22 @@
-﻿@model Villa
+﻿@model Aranya.Domain.Entities.Villa
+
 <div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-lg-10">
             <div class="card">
                 <div class="card-header bg-success text-center text-white">
-                    <h1>Create New Villa</h1>
+                    <h1>Update Villa</h1>
                 </div>
                 <div class="card-body">
                     <div class="col-12 text-end p-1 mb-2">
                         <a asp-action="Index" asp-controller="Villa" class="btn btn-dark">Back to Villa <i class="bi bi-arrow-return-left"></i></a>
                     </div>
                     <form method="post">
+                        <input asp-for="Id" hidden />
                         @* <div asp-validation-summary="All" class="alert-danger"></div> *@
                         <div class="row mb-3">
                             <div class="col-3">
-                                <label asp-for="Name" class="form-label text-black"></label>                    
+                                <label asp-for="Name" class="form-label text-black"></label>
                             </div>
                             <div class="col-lg-9">
                                 <input asp-for="Name" class="form-control" />
@@ -63,7 +65,7 @@
                             </div>
                         </div>
                         <div class="col-12 text-center border p-3">
-                            <button type="submit" class="btn btn-success" title="Update">Save <i class="bi bi-plus-circle"></i></button>
+                            <button type="submit" class="btn btn-success" title="Update">Update <i class="bi bi-pencil-square"></i></button>
                             <button type="reset" class="btn btn-danger">Clear <i class="bi bi-x-circle"></i></button>
                         </div>
                     </form>
@@ -72,7 +74,7 @@
         </div>
     </div>
 </div>
-@section Scripts{
+@section Scripts {
     @{
         <partial name="_ValidationScriptsPartial" />
     }

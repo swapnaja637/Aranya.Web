@@ -17,6 +17,8 @@ namespace Aranya.Infrastructure.Data
         }
         public DbSet<Villa> Tbl_Villas { get; set; }
 
+        public DbSet<VillaNumber> Tbl_VillaNumber { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Villa>().HasData(
@@ -80,6 +82,32 @@ namespace Aranya.Infrastructure.Data
                        CreatedDate = DateTime.Now,
                        UpdatedDate = DateTime.Now
                    });
+            modelBuilder.Entity<VillaNumber>().HasData(
+                new VillaNumber
+                {
+                    Villa_Number = 103,
+                    VillaID = 1
+                },
+                new VillaNumber
+                {
+                    Villa_Number = 104,
+                    VillaID = 2
+                }
+                , new VillaNumber
+                {
+                    Villa_Number = 105,
+                    VillaID = 2
+                },new VillaNumber
+                {
+                    Villa_Number = 108,
+                    VillaID = 1
+                }, new VillaNumber
+                {
+                    Villa_Number = 203,
+                    VillaID = 1
+                });
         }
+
+
     }
 }

@@ -1,0 +1,57 @@
+﻿@model VillaNumber
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card">
+                <div class="card-header bg-success text-center text-white">
+                    <h1>Create New Villa Number</h1>
+                </div>
+                <div class="card-body">
+                    <div class="col-12 text-end p-1 mb-2">
+                        <a asp-action="Index" asp-controller="VillaNumber" class="btn btn-dark">Back to Villa Number <i class="bi bi-arrow-return-left"></i></a>
+                    </div>
+                    <form method="post">
+                        <div class="row mb-3">
+                            <div class="col-3">
+                                <label asp-for="VillaID" class="form-label text-black"></label>
+                            </div>
+                            <div class="col-lg-9">
+                           @*    <select asp-for = "@Model.VillaID"  asp-items = "@ViewData["Villalist"] as IEnumerable<SelectListItem>"
+                                  class="form-control">
+                              <option value="0">Select Villa</option>    
+                              </select> *@
+                                <select asp-for="@Model.VillaID" asp-items="@ViewBag.villalist"
+                                        class="form-control">
+                                    <option value="0">Select Villa</option>
+                                </select>
+                                <span asp-validation-for="VillaID" class="alert-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-3">
+                                <label asp-for="SpecialDetails" class="form-label text-black"></label>
+                            </div>
+                            <div class="col-lg-9">
+                                <input asp-for="SpecialDetails" class="form-control" />
+                                <span asp-validation-for="SpecialDetails" class="alert-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-3">
+                                <label asp-for="Villa_Number" class="form-label text-black"></label>
+                            </div>
+                            <div class="col-lg-9">
+                                <input asp-for="Villa_Number" class="form-control" />
+                                <span asp-validation-for="Villa_Number" class="alert-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 text-center border p-3">
+                            <button type="submit" class="btn btn-success" title="Update">Save <i class="bi bi-plus-circle"></i></button>
+                            <button type="reset" class="btn btn-danger">Clear <i class="bi bi-x-circle"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

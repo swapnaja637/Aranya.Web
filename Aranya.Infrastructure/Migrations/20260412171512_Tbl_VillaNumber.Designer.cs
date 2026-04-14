@@ -4,6 +4,7 @@ using Aranya.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Aranya.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20260412171512_Tbl_VillaNumber")]
+    partial class Tbl_VillaNumber
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,9 +48,6 @@ namespace Aranya.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("IsActive")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -71,66 +71,61 @@ namespace Aranya.Infrastructure.Migrations
                         {
                             Id = 1,
                             Area = "5000 sq ft",
-                            CreatedDate = new DateTime(2026, 4, 14, 20, 41, 35, 813, DateTimeKind.Local).AddTicks(3636),
+                            CreatedDate = new DateTime(2026, 4, 12, 22, 45, 11, 774, DateTimeKind.Local).AddTicks(3588),
                             Description = "This is the description of the Royal Villa",
                             ImageUrl = "",
-                            IsActive = "Y",
                             Name = "Royal Villa For Family",
                             Occupancy = 4,
                             Rate = 200.0,
-                            UpdatedDate = new DateTime(2026, 4, 14, 20, 41, 35, 813, DateTimeKind.Local).AddTicks(3651)
+                            UpdatedDate = new DateTime(2026, 4, 12, 22, 45, 11, 774, DateTimeKind.Local).AddTicks(3599)
                         },
                         new
                         {
                             Id = 2,
                             Area = "5000 sq ft",
-                            CreatedDate = new DateTime(2026, 4, 14, 20, 41, 35, 813, DateTimeKind.Local).AddTicks(3657),
+                            CreatedDate = new DateTime(2026, 4, 12, 22, 45, 11, 774, DateTimeKind.Local).AddTicks(3604),
                             Description = "A special room for a special memories.",
                             ImageUrl = "",
-                            IsActive = "Y",
                             Name = "Honeymoon sweet For Couple",
                             Occupancy = 4,
                             Rate = 200.0,
-                            UpdatedDate = new DateTime(2026, 4, 14, 20, 41, 35, 813, DateTimeKind.Local).AddTicks(3658)
+                            UpdatedDate = new DateTime(2026, 4, 12, 22, 45, 11, 774, DateTimeKind.Local).AddTicks(3605)
                         },
                         new
                         {
                             Id = 3,
                             Area = "5000 sq ft",
-                            CreatedDate = new DateTime(2026, 4, 14, 20, 41, 35, 813, DateTimeKind.Local).AddTicks(3662),
+                            CreatedDate = new DateTime(2026, 4, 12, 22, 45, 11, 774, DateTimeKind.Local).AddTicks(3608),
                             Description = "This is the delux ville with AC.",
                             ImageUrl = "",
-                            IsActive = "Y",
                             Name = "Delux villa for couple",
                             Occupancy = 4,
                             Rate = 200.0,
-                            UpdatedDate = new DateTime(2026, 4, 14, 20, 41, 35, 813, DateTimeKind.Local).AddTicks(3663)
+                            UpdatedDate = new DateTime(2026, 4, 12, 22, 45, 11, 774, DateTimeKind.Local).AddTicks(3609)
                         },
                         new
                         {
                             Id = 4,
                             Area = "5000 sq ft",
-                            CreatedDate = new DateTime(2026, 4, 14, 20, 41, 35, 813, DateTimeKind.Local).AddTicks(3667),
+                            CreatedDate = new DateTime(2026, 4, 12, 22, 45, 11, 774, DateTimeKind.Local).AddTicks(3612),
                             Description = "This is the description of the Sea facing Villa",
                             ImageUrl = "",
-                            IsActive = "Y",
                             Name = "Sea facing villa",
                             Occupancy = 4,
                             Rate = 200.0,
-                            UpdatedDate = new DateTime(2026, 4, 14, 20, 41, 35, 813, DateTimeKind.Local).AddTicks(3668)
+                            UpdatedDate = new DateTime(2026, 4, 12, 22, 45, 11, 774, DateTimeKind.Local).AddTicks(3613)
                         },
                         new
                         {
                             Id = 5,
                             Area = "5000 sq ft",
-                            CreatedDate = new DateTime(2026, 4, 14, 20, 41, 35, 813, DateTimeKind.Local).AddTicks(3672),
+                            CreatedDate = new DateTime(2026, 4, 12, 22, 45, 11, 774, DateTimeKind.Local).AddTicks(3616),
                             Description = "This is the description of the Tree Villa with AC and 2 rooms.",
                             ImageUrl = "",
-                            IsActive = "Y",
                             Name = "Tree Villa",
                             Occupancy = 4,
                             Rate = 200.0,
-                            UpdatedDate = new DateTime(2026, 4, 14, 20, 41, 35, 813, DateTimeKind.Local).AddTicks(3673)
+                            UpdatedDate = new DateTime(2026, 4, 12, 22, 45, 11, 774, DateTimeKind.Local).AddTicks(3617)
                         });
                 });
 

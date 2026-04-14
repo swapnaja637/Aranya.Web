@@ -1,13 +1,19 @@
 using Aranya.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-
+using Serilog;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDBContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Host.UseSerilog();
 var app = builder.Build();
+
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

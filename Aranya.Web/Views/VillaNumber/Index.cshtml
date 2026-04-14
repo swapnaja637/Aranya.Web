@@ -1,10 +1,10 @@
-﻿@model IEnumerable<Villa>
+﻿@model IEnumerable<VillaNumber>
 <center>
     <div class="w-75 card border-3 p-2 text-lg-center">
         <div class="card-header bg-success rounded-3 border-2 bg-gradient">
             <div class="row">
                 <div class="col-12 text-center">
-                    <h1 class="text-light text-center">Villa List</h1>
+                    <h1 class="text-light text-center">Villa Number List</h1>
                 </div>
             </div>
         </div>
@@ -12,51 +12,44 @@
     <div class="card-body border w-75 p-4">
         <div class="row pb-3">
             <div class="col-6 text-end offset-6">
-                <a asp-controller="Villa" asp-action="Create" class="btn btn-dark">Create New Villa <i class="bi bi-plus-circle"></i></a>
+                <a asp-controller="VillaNumber" asp-action="Create" class="btn btn-dark">Create New Villa Number <i class="bi bi-plus-circle"></i></a>
             </div>
         </div>
         <table class="table table-bordered table-striped w-75">
             <thead>
                 <tr>
                     <th>
-                        Name
+                        Villa Number
                     </th>
                     <th>
-                        Price
+                        Special Details
                     </th>
-                    <th>
-                        Area
-                    </th>
-                    <th>
-                        Occupancy
-                    </th>
+                    
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var villa in Model)
+                @foreach (var villanumber in Model)
                 {
                     <tr>
                         <td>
-                            @villa.Name
+                            @villanumber.Villa_Number
                         </td>
-                        <td>@villa.Rate</td>
-                        <td>@villa.Area</td>
-                        <td>@villa.Occupancy</td>
+                        <td>@villanumber.SpecialDetails</td>
                         <td>
                             <div class="w-100 row">
                                 <div class="col-4">
-                                <a asp-controller="Villa" asp-action="Update"
-                                   asp-route-villaId="@villa.Id" class="btn btn-success">  
-                                    <i class="bi bi-pencil-square"></i>
-                                </a>
+                                    <a asp-controller="VillaNumber" asp-action="Update"
+                                       asp-route-villaNumberId="@villanumber.Villa_Number" class="btn btn-success">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
                                 </div>
                                 <div class="col-1"></div>
                                 <div class="col-4">
-                                    <a  data-bs-toggle="modal" data-bs-target="#deleteConfirmModal"
-                                       data-url="@Url.Action("Delete", "Villa", new { Id = villa.Id })" class="btn btn-danger">
-                                    <i class="bi bi-trash"></i>
-                                </a>
+                                    <a data-bs-toggle="modal" data-bs-target="#deleteConfirmModal"
+                                       data-url="@Url.Action("Delete", "VillaNumber", new { Id = villanumber.Villa_Number })" class="btn btn-danger">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
                                 </div>
                             </div>
                         </td>
