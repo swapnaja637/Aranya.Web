@@ -1,5 +1,6 @@
 ﻿using Aranya.Domain.Entities;
 using Aranya.Infrastructure.Data;
+using Aranya.Web.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -34,16 +35,25 @@ namespace Aranya.Web.Controllers
         {
             try
             {
-                var villas = await _context.Tbl_Villas.ToListAsync();
-                IEnumerable<SelectListItem> villalist = villas.Select(
-                     u => new SelectListItem
-                     {
-                         Text = u.Name,
-                         Value = u.Id.ToString()
-                     });
-                //ViewData["Villalist"] = villalist;
-                ViewBag.villalist = villalist;
-                return View();
+                VMVillaNumber vmVillanumber = new()
+                {
+                    villaList = await _context.Tbl_Villas.Select(u => new SelectListItem
+                    {
+                        Text = u.Name,
+                        Value = u.Id.ToString()
+                    }).ToListAsync()
+                };
+                //var villas = await _context.Tbl_Villas.ToListAsync();
+                //IEnumerable<SelectListItem> villalist = villas.Select(
+                //     u => new SelectListItem
+                //     {
+                //         Text = u.Name,
+                //         Value = u.Id.ToString()
+                //     });
+             
+                ////ViewData["Villalist"] = villalist;
+                //ViewBag.villalist = villalist;
+                return View(vmVillanumber);
             }
             catch (Exception ex)
             {

@@ -1,4 +1,4 @@
-﻿@model VillaNumber
+﻿@model VMVillaNumber
 <div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-lg-10">
@@ -13,36 +13,39 @@
                     <form method="post">
                         <div class="row mb-3">
                             <div class="col-3">
-                                <label asp-for="VillaID" class="form-label text-black"></label>
+                                <label asp-for="villaNumber.VillaID" class="form-label text-black"></label>
                             </div>
                             <div class="col-lg-9">
+                               @*VIEWDATA STORED THE DATA AS KEY,VALUE PAIR VIEWDATA<STRING,OBJECT> SO,the value is stored in objecct and hene we need to convert it.
+                                   But in ViewBag is dynamic ,compiler doesn't check its type,t runtime asp.net core figure out the atual object .and henc
+                                   it doens neeed casting.' *@
                            @*    <select asp-for = "@Model.VillaID"  asp-items = "@ViewData["Villalist"] as IEnumerable<SelectListItem>"
                                   class="form-control">
                               <option value="0">Select Villa</option>    
                               </select> *@
-                                <select asp-for="@Model.VillaID" asp-items="@ViewBag.villalist"
+                                <select asp-for="@Model.villaNumber.VillaID" asp-items="@Model.villaList"
                                         class="form-control">
                                     <option value="0">Select Villa</option>
                                 </select>
-                                <span asp-validation-for="VillaID" class="alert-danger"></span>
+                                <span asp-validation-for="villaNumber.VillaID" class="alert-danger"></span>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-3">
-                                <label asp-for="SpecialDetails" class="form-label text-black"></label>
+                                <label asp-for="villaNumber.SpecialDetails" class="form-label text-black"></label>
                             </div>
                             <div class="col-lg-9">
-                                <input asp-for="SpecialDetails" class="form-control" />
-                                <span asp-validation-for="SpecialDetails" class="alert-danger"></span>
+                                <input asp-for="villaNumber.SpecialDetails" class="form-control" />
+                                <span asp-validation-for="villaNumber.SpecialDetails" class="alert-danger"></span>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-3">
-                                <label asp-for="Villa_Number" class="form-label text-black"></label>
+                                <label asp-for="villaNumber.Villa_Number" class="form-label text-black"></label>
                             </div>
                             <div class="col-lg-9">
-                                <input asp-for="Villa_Number" class="form-control" />
-                                <span asp-validation-for="Villa_Number" class="alert-danger"></span>
+                                <input asp-for="villaNumber.Villa_Number" class="form-control" />
+                                <span asp-validation-for="villaNumber.Villa_Number" class="alert-danger"></span>
                             </div>
                         </div>
                         <div class="col-12 text-center border p-3">
