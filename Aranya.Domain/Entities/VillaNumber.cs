@@ -15,10 +15,9 @@ namespace Aranya.Domain.Entities
         public int Villa_Number { get; set; }
 
         [ForeignKey("Villa")]
-        
         public int VillaID { get; set; }
         [ValidateNever]
-        //public Villa Villa { get; set; }
+        public Villa villa { get; set; }
 
         public string? SpecialDetails { get; set; }
     }

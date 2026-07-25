@@ -19,6 +19,9 @@
             <thead>
                 <tr>
                     <th>
+                        Villa Name
+                    </th>
+                    <th>
                         Villa Number
                     </th>
                     <th>
@@ -33,6 +36,9 @@
                 {
                     <tr>
                         <td>
+                            @villanumber.villa.Name
+                        </td>
+                        <td>
                             @villanumber.Villa_Number
                         </td>
                         <td>@villanumber.SpecialDetails</td>
@@ -43,8 +49,8 @@
                                        asp-route-villaNumberId="@villanumber.Villa_Number" class="btn btn-success">
                                         <i class="bi bi-pencil-square"></i>
                                     </a>
-                                </div>
-                                <div class="col-1"></div>
+                                </div><br />
+                                <div class="col-1 m-2"></div>
                                 <div class="col-4">
                                     <a data-bs-toggle="modal" data-bs-target="#deleteConfirmModal"
                                        data-url="@Url.Action("Delete", "VillaNumber", new { Id = villanumber.Villa_Number })" class="btn btn-danger">

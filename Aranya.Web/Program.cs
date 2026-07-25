@@ -1,4 +1,6 @@
+using Aranya.Application.Generic.Interfaces;
 using Aranya.Infrastructure.Data;
+using Aranya.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDBContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Host.UseSerilog();
 var app = builder.Build();
 

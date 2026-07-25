@@ -1,4 +1,5 @@
-﻿using Aranya.Domain.Entities;
+﻿using Aranya.Application.Generic.Interfaces;
+using Aranya.Domain.Entities;
 using Aranya.Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -7,15 +8,15 @@ namespace Aranya.Web.Controllers
 {
     public class VillaController : Controller
     {
-        private readonly ApplicationDBContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public VillaController(ApplicationDBContext context)
+        public VillaController(IUnitOfWork villaRepo)
         {
-            _context = context;
+            _unitOfWork = villaRepo;
         }
         public async Task<IActionResult> Index()
         {
-            var villas = await _context.Tbl_Villas.ToListAsync();
+            var villas = await _unitOfWork.villa.GetAllAsync();
             return View(villas);
         }
         public IActionResult Create()
@@ -35,8 +36,8 @@ namespace Aranya.Web.Controllers
             if (ModelState.IsValid)
             {
                 villa.CreatedDate = DateTime.Now;
-                await _context.AddAsync(villa);
-                _context.SaveChanges();
+                bool Flag = _unitOfWork.villa.Add(villa);
+                _unitOfWork.villa.Save();
                 TempData["success"] = " Record added successfully.";
                 return RedirectToAction("Index");
             }
@@ -48,7 +49,7 @@ namespace Aranya.Web.Controllers
         }
         public async Task<IActionResult> Update(int villaId)
         {
-            Villa? villa = await _context.Tbl_Villas.FirstOrDefaultAsync(i => i.Id == villaId);
+            Villa? villa = await _unitOfWork.villa.GetAsync(u => u.Id == villaId);
             if (villa == null)
             {
                 return RedirectToAction("Error", "Home");
@@ -63,8 +64,8 @@ namespace Aranya.Web.Controllers
         {
             if (ModelState.IsValid && villa.Id != null)
             {
-                _context.Update(villa);
-                _context.SaveChanges();
+                _unitOfWork.villa.Update(villa);
+                _unitOfWork.villa.Save();
                 TempData["success"] = "Record updated succcessfully.";
                 return RedirectToAction("index");
             }
@@ -74,18 +75,18 @@ namespace Aranya.Web.Controllers
                 TempData["error"] = "Record not updated succcessfully.";
                 return View();
             }
-            
+
         }
         public async Task<IActionResult> Delete(int Id)
         {
-            Villa? villa = await _context.Tbl_Villas.FirstOrDefaultAsync(u => u.Id == Id);
+            Villa? villa = await _unitOfWork.villa.GetAsync(u => u.Id == Id);
             if (villa != null)
             {
 
                 if (villa.Id != 0)
                 {
-                    _context.Remove(villa);
-                    _context.SaveChanges();
+                    _unitOfWork.villa.Delete(villa);
+                    _unitOfWork.villa.Save();
                     TempData["success"] = "Record deleted succcessfully.";
                     return RedirectToAction("Index");
                 }
@@ -102,5 +103,5 @@ namespace Aranya.Web.Controllers
             }
         }
     }
-    
+
 }

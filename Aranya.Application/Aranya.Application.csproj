@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Aranya.Domain\Aranya.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
