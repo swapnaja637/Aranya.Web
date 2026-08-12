@@ -10,12 +10,12 @@ namespace Aranya.Web.Controllers
 {
     public class VillaNumberController : Controller
     {
-        private readonly ApplicationDBContext _context;
+        private readonly IUnitOfWork _unitOfWork;
         
         private readonly ILogger<VillaNumberController> _logger;
-        public VillaNumberController(ApplicationDBContext context, ILogger<VillaNumberController> logger)
+        public VillaNumberController(IUnitOfWork unitOfWork, ILogger<VillaNumberController> logger)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
             _logger = logger;
         }
         public async Task<IActionResult> Index()
@@ -23,8 +23,8 @@ namespace Aranya.Web.Controllers
             try
             {
                 _logger.LogInformation("Fetching villa numbers from the database.");
-                var villaNumber = await _context.Tbl_VillaNumber.Include(u => u.villa).ToListAsync();
-                //  var vn = await _context.Tbl_VillaNumber.Include(u => u.VillaID).ToListAsync();    
+                var villaNumber = await _unitOfWork.villaNumber.GetAllAsync(includeproperties: "villa");
+                //  var vn = await _unitOfWork.Tbl_VillaNumber.Include(u => u.VillaID).ToListAsync();    
                 return View(villaNumber);
             }
             catch (Exception ex)
@@ -38,16 +38,17 @@ namespace Aranya.Web.Controllers
         {
             try
             {
+               var villas = await _unitOfWork.villa.GetAllAsync();
 
                 VMVillaNumber vmVillanumber = new()
                 {
-                    villaList = await _context.Tbl_Villas.Select(u => new SelectListItem
+                    villaList = villas.Select(u => new SelectListItem
                     {
                         Text = u.Name,
                         Value = u.Id.ToString()
-                    }).ToListAsync()
+                    }).ToList()
                 };
-                //var villas = await _context.Tbl_Villas.ToListAsync();
+                //var villas = await _unitOfWork.Tbl_Villas.ToListAsync();
                 //IEnumerable<SelectListItem> villalist = villas.Select(
                 //     u => new SelectListItem
                 //     {
@@ -71,12 +72,13 @@ namespace Aranya.Web.Controllers
         {
             try
             {
+                var villas = await _unitOfWork.villa.GetAllAsync(); 
                 // VillaNumber? villnum = vmvillaNumber.villaNumber;
-                bool existingVillaNumber = await _context.Tbl_VillaNumber.AnyAsync(u => u.Villa_Number == vmvillaNumber.villaNumber.Villa_Number);
+                bool existingVillaNumber = await _unitOfWork.villaNumber.Any(u => u.Villa_Number == vmvillaNumber.villaNumber.Villa_Number);
                 // ModelState.Remove("Villa");
                 if (ModelState.IsValid && !existingVillaNumber)
                 {
-                    //VillaNumber? existingVillaNumber = await _context.Tbl_VillaNumber.FirstAsync(u => u.Villa_Number == vmvillaNumber.Villa_Number);
+                    //VillaNumber? existingVillaNumber = await _unitOfWork.Tbl_VillaNumber.FirstAsync(u => u.Villa_Number == vmvillaNumber.Villa_Number);
 
                     //if (existingVillaNumber !=)
                     //{
@@ -87,8 +89,8 @@ namespace Aranya.Web.Controllers
                     //else
                     //{
                     _logger.LogInformation("Adding a new villa number to the database.");
-                    _context.Tbl_VillaNumber.Add(vmvillaNumber.villaNumber);
-                    await _context.SaveChangesAsync();
+                    _unitOfWork.villaNumber.Add(vmvillaNumber.villaNumber);
+                     _unitOfWork.villaNumber.Save();
                     TempData["success"] = "Record added successfully.";
                     return RedirectToAction(nameof(Index));
                     // }
@@ -96,11 +98,11 @@ namespace Aranya.Web.Controllers
                 }
                 else
                 {
-                    vmvillaNumber.villaList = await _context.Tbl_Villas.Select(u => new SelectListItem
+                    vmvillaNumber.villaList =  villas.Select(u => new SelectListItem
                     {
                         Text = u.Name,
                         Value = u.Id.ToString()
-                    }).ToListAsync();
+                    }).ToList();
                     _logger.LogInformation("Villa number" + vmvillaNumber.villaNumber.Villa_Number + " already present");
                     TempData["error"] = "Villa number" + vmvillaNumber.villaNumber.Villa_Number + " already present";
                     return View(vmvillaNumber);
@@ -118,14 +120,15 @@ namespace Aranya.Web.Controllers
             try
             {
                 _logger.LogInformation("Fetching villa number with ID {VillaNumber} for update.", villaNumberId);
-                var villaNum = await _context.Tbl_VillaNumber.FirstOrDefaultAsync(i => i.Villa_Number == villaNumberId);
+                var villaNum = await _unitOfWork.villaNumber.GetAsync(i => i.Villa_Number == villaNumberId);
+                var villas = await _unitOfWork.villa.GetAllAsync();
                 VMVillaNumber vmVillanumber = new()
                 {
-                    villaList = await _context.Tbl_Villas.Select(u => new SelectListItem
+                    villaList =  villas.Select(u => new SelectListItem
                     {
                         Text = u.Name,
                         Value = u.Id.ToString()
-                    }).ToListAsync(),
+                    }).ToList(),
                     villaNumber = villaNum
 
                 };
@@ -152,8 +155,8 @@ namespace Aranya.Web.Controllers
             {
                 _logger.LogInformation("In UpdatePost Method with vmVillaNumber data : " + vMVillaNumber);
                 var villanumber = vMVillaNumber.villaNumber;
-                _context.Update(villanumber);
-               await _context.SaveChangesAsync();
+               await _unitOfWork.villaNumber.update(villanumber);
+               await _unitOfWork.Save();
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
@@ -170,9 +173,9 @@ namespace Aranya.Web.Controllers
             {
                 _logger.LogInformation("In function Delete post.For villa number" + Id);
                 //USE FINDASYNCH FOR PRIMARY KEY AND IF WANT TO DELETE FROM ANOTHER COLUMN THEN USE FIRSTORDEFAULTASYNCH
-                var villa = await _context.Tbl_VillaNumber.FindAsync(Id);
-                _context.Remove(villa);
-                await  _context.SaveChangesAsync();
+                var villa = await _unitOfWork.villaNumber.GetAsync(u=>u.Villa_Number==Id);
+                _unitOfWork.villaNumber.Delete(villa);
+                await  _unitOfWork.Save();
                 TempData["success"] = "Record deleted successfully";
                 return RedirectToAction(nameof(Index));
             }

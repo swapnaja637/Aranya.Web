@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Aranya.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,12 +7,8 @@ using System.Threading.Tasks;
 
 namespace Aranya.Application.Generic.Interfaces
 {
-    public interface IUnitOfWork
+    public interface IVillaNumber  : IRepository<VillaNumber>
     {
-        IVillaRepository villa { get; }
-
-        IVillaNumber villaNumber { get; }
-
-        Task<bool> Save();
+         Task<bool> update(VillaNumber entity);
     }
 }

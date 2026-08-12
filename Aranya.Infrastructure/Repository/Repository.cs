@@ -34,6 +34,20 @@ namespace Aranya.Infrastructure.Repository
             }
         }
 
+        public async Task<bool> Any(Expression<Func<T, bool>> filter)
+        {
+            try
+            {
+                return await dbSet.AnyAsync(filter);
+
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it as needed
+                throw;
+            }
+        }
+
         public bool Delete(T entity)
         {
             try

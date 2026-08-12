@@ -15,6 +15,6 @@ namespace Aranya.Application.Generic.Interfaces
      //   bool Add(Villa entity);
         bool Update(Villa entity);
        // bool Delete(Villa entity);
-        bool Save();
+        //bool Save();
     }
 }

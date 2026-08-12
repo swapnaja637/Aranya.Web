@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +17,7 @@ namespace Aranya.Domain.Entities
         public string Name { get; set; }
         public string Description { get; set; }
         [Display(Name="Upload Image")]
-        public string ImageUrl { get; set; }
+        public string? ImageUrl { get; set; }
         [Display(Name="Is Occupied")]
         [Range(1,5)]
         public int Occupancy { get; set; }
@@ -26,8 +28,10 @@ namespace Aranya.Domain.Entities
         public string Area { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         public DateTime UpdatedDate { get; set; } = DateTime.Now;
-
         public string? IsActive { get; set; } = "Y";
+        [NotMapped]
+       public IFormFile? Image { get; set; }
+
 
 
     }

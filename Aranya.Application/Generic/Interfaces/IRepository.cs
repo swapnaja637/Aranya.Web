@@ -15,5 +15,6 @@ namespace Aranya.Application.Generic.Interfaces
         bool Add(T entity);
         bool Delete(T entity);
         bool Save();
+        Task<bool> Any(Expression<Func<T, bool>> filter);
     }
 }

@@ -10,7 +10,7 @@
                     <div class="col-12 text-end p-1 mb-2">
                         <a asp-action="Index" asp-controller="Villa" class="btn btn-dark">Back to Villa <i class="bi bi-arrow-return-left"></i></a>
                     </div>
-                    <form method="post">
+                    <form method="post" enctype="multipart/form-data">
                         @* <div asp-validation-summary="All" class="alert-danger"></div> *@
                         <div class="row mb-3">
                             <div class="col-3">
@@ -59,7 +59,8 @@
                                 <label asp-for="ImageUrl" class="form-label text-black"></label>
                             </div>
                             <div class="col-9">
-                                <input asp-for="ImageUrl" class="form-control" />
+                                <input type="hidden" asp-for="ImageUrl" class="form-control" />
+                                <input class="form-control" asp-for="Image" />
                             </div>
                         </div>
                         <div class="col-12 text-center border p-3">

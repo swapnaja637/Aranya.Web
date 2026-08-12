@@ -11,62 +11,71 @@
                     <div class="col-12 text-end p-1 mb-2">
                         <a asp-action="Index" asp-controller="Villa" class="btn btn-dark">Back to Villa <i class="bi bi-arrow-return-left"></i></a>
                     </div>
-                    <form method="post">
+                    <form method="post" enctype="multipart/form-data">
                         <input asp-for="Id" hidden />
                         @* <div asp-validation-summary="All" class="alert-danger"></div> *@
-                        <div class="row mb-3">
-                            <div class="col-3">
-                                <label asp-for="Name" class="form-label text-black"></label>
+                        <div class="col-lg-12 col-md-12 col-xl-12 row">
+                            <div class="col-lg-8 col-md-8 col-xl-8">
+                                <div class="row mb-3">
+                                    <div class="col-3">
+                                        <label asp-for="Name" class="form-label text-black"></label>
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <input asp-for="Name" class="form-control" />
+                                        <span asp-validation-for="Name" class="alert-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <label asp-for="Description" class="form-label text-black"></label>
+                                    </div>
+                                    <div class="col-9">
+                                        <textarea class="form-control" asp-for="Description"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <label asp-for="Rate" class="form-label text-black"></label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input asp-for="Rate" class="form-control" />
+                                        <span asp-validation-for="Rate" class="alert-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <label asp-for="Occupancy" class="form-label text-black"></label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input asp-for="Occupancy" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <label asp-for="Area" class="form-label text-black"></label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input asp-for="Area" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <input type="hidden" asp-for="ImageUrl" class="form-label text-black" />
+                                    </div>
+                                    <div class="col-9">
+                                        <label asp-for="ImageUrl" hidden></label>
+                                        <input type="file" asp-for="Image" />
+                                    </div>
+                                </div>
+                                <div class="col-12 text-center border p-3">
+                                    <button type="submit" class="btn btn-success" title="Update">Update <i class="bi bi-pencil-square"></i></button>
+                                    <button type="reset" class="btn btn-danger">Clear <i class="bi bi-x-circle"></i></button>
+                                </div>
                             </div>
-                            <div class="col-lg-9">
-                                <input asp-for="Name" class="form-control" />
-                                <span asp-validation-for="Name" class="alert-danger"></span>
+                            <div class="col-lg-4 col-md-4 col-xl-4" >
+                                <img src="~/@Model.ImageUrl" width="100%"
+                                 class="card-img" />
                             </div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col-3">
-                                <label asp-for="Description" class="form-label text-black"></label>
-                            </div>
-                            <div class="col-9">
-                                <textarea class="form-control" asp-for="Description"></textarea>
-                            </div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col-3">
-                                <label asp-for="Rate" class="form-label text-black"></label>
-                            </div>
-                            <div class="col-9">
-                                <input asp-for="Rate" class="form-control" />
-                                <span asp-validation-for="Rate" class="alert-danger"></span>
-                            </div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col-3">
-                                <label asp-for="Occupancy" class="form-label text-black"></label>
-                            </div>
-                            <div class="col-9">
-                                <input asp-for="Occupancy" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col-3">
-                                <label asp-for="Area" class="form-label text-black"></label>
-                            </div>
-                            <div class="col-9">
-                                <input asp-for="Area" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col-3">
-                                <label asp-for="ImageUrl" class="form-label text-black"></label>
-                            </div>
-                            <div class="col-9">
-                                <input asp-for="ImageUrl" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="col-12 text-center border p-3">
-                            <button type="submit" class="btn btn-success" title="Update">Update <i class="bi bi-pencil-square"></i></button>
-                            <button type="reset" class="btn btn-danger">Clear <i class="bi bi-x-circle"></i></button>
                         </div>
                     </form>
                 </div>

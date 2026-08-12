@@ -79,19 +79,19 @@ namespace Aranya.Infrastructure.Repository
         //    }
         //}
 
-        public bool Save()
-        {
-            try
-            {
-                _context.SaveChanges();
-                return true;
-            }
-            catch(Exception ex)
-            {
-                throw;
+        //public bool Save()
+        //{
+        //    try
+        //    {
+        //        _context.SaveChanges();
+        //        return true;
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        throw;
                 
-            }
-        }
+        //    }
+        //}
 
         public bool Update(Villa entity)
         {
